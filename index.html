@@ -24,10 +24,13 @@ header.top nav{display:flex;gap:1.25rem;flex-wrap:wrap}
 header.top a{text-decoration:none}
 header.top a:hover{text-decoration:underline;text-decoration-color:var(--mark);text-decoration-thickness:4px;text-underline-offset:5px}
 .hero{padding:clamp(3rem,10vw,7rem) 0 clamp(2rem,6vw,4rem)}
-.hero h1{font:800 clamp(3rem,11vw,8rem)/.92 var(--sans);letter-spacing:-.03em;margin:0 0 1.5rem}
+.hero h1{font:800 clamp(3rem,11vw,8rem)/.92 var(--sans);letter-spacing:-.03em;margin:0}
 .hero p{max-width:34em;margin:0;color:var(--muted);font-size:1.25rem}
-.hero p+p{margin-top:1rem}
-section{padding:clamp(2.5rem,7vw,4.5rem) 0;border-top:1px solid var(--line)}
+section{padding:clamp(2.5rem,7vw,4.5rem) 0}
+#reportagens,#fotos,#contato{border-top:1px solid var(--line)}
+/* Reportagens e Vídeos: espaço menor e igual acima, no meio e abaixo */
+#reportagens{padding-top:clamp(1.25rem,3vw,2.25rem);padding-bottom:0}
+#videos{padding-top:clamp(1.25rem,3vw,2.25rem);padding-bottom:calc(clamp(1.25rem,3vw,2.25rem) - 3px)}
 section h2{font:800 clamp(1.75rem,4vw,2.5rem)/1.1 var(--sans);margin:0 0 2rem;letter-spacing:-.02em}
 .meta{font:500 .9rem/1.3 var(--sans);color:var(--muted)}
 /* reportagens */
@@ -43,7 +46,7 @@ section h2{font:800 clamp(1.75rem,4vw,2.5rem)/1.1 var(--sans);margin:0 0 2rem;le
 .videos{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
 .video .frame{aspect-ratio:16/9;background:var(--ink);border-radius:6px;overflow:hidden;display:grid;place-items:center;color:#EEE2E2}
 .video iframe,.video video{width:100%;height:100%;border:0;display:block}
-.video h3{font:600 1.2rem/1.3 var(--sans);margin:.75rem 0 .2rem}
+.video h3{font:600 1.2rem/1.3 var(--sans);margin:.75rem 0 0}
 .video p{margin:0;color:var(--muted);font-size:1rem}
 /* fotos */
 .photos{columns:3 240px;column-gap:1rem}
@@ -59,8 +62,10 @@ dialog p{color:#fff;text-align:center;font-size:1rem}
 .drive-btn{display:inline-block;margin-top:1.5rem;padding:.8rem 1.4rem;background:var(--mark);color:#2A1616;font:600 1rem/1 var(--sans);text-decoration:none;border-radius:6px}
 .drive-btn:hover{filter:brightness(.95)}
 /* sobre e contato */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+@media (max-width:700px){.about{grid-template-columns:1fr}}
 .contact a{display:inline-block;margin:0 1.25rem .5rem 0;font-family:var(--sans);font-weight:500}
-footer{padding:2rem 0 3rem;border-top:1px solid var(--line)}
+footer{padding:2rem 0 3rem}
 </style>
 </head>
 <body>
@@ -78,8 +83,6 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line)}
   <main>
     <div class="hero">
       <h1>Letícia Woolf</h1>
-      <p>Estou no sétimo período de Jornalismo na PUC-Rio. Tenho experiência em transmissões ao vivo, produção de conteúdo e planejamento de comunicação.</p>
-          <p>Em 2022, participei do Disney College Program, no Walt Disney World Resort, na Flórida. Fui estagiária de produção na Globo, onde desenvolvi habilidades de gestão e rotinas administrativas. Meu interesse está em produção editorial, pesquisa e análise de dados aplicados à comunicação.</p>
     </div>
 
     <section id="reportagens">
@@ -99,12 +102,19 @@ footer{padding:2rem 0 3rem;border-top:1px solid var(--line)}
     </section>
 
     <section id="contato">
-      <div class="contact">
+      <div class="about">
+        <div>
+          <h2>Sobre</h2>
+          <p>Estou no sétimo período de Jornalismo na PUC-Rio. Tenho experiência em transmissões ao vivo, produção de conteúdo e planejamento de comunicação.</p>
+          <p>Em 2022, participei do Disney College Program, no Walt Disney World Resort, na Flórida. Fui estagiária de produção na Globo, onde desenvolvi habilidades de gestão e rotinas administrativas. Meu interesse está em produção editorial, pesquisa e análise de dados aplicados à comunicação.</p>
+        </div>
+        <div class="contact">
           <h2>Contato</h2>
           <a href="mailto:leticiawoolf@gmail.com">leticiawoolf@gmail.com</a>
           <a href="https://www.linkedin.com/in/leticiawoolf">LinkedIn</a>
           <a href="https://github.com/Leticiawoolf">GitHub</a>
         </div>
+      </div>
     </section>
   </main>
 

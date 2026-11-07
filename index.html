@@ -30,6 +30,7 @@ section{padding:clamp(2.5rem,7vw,4.5rem) 0}
 #reportagens,#fotos,#contato{border-top:1px solid var(--line)}
 /* Reportagens e Vídeos: espaço menor e igual acima, no meio e abaixo */
 #reportagens{padding-top:clamp(1.25rem,3vw,2.25rem);padding-bottom:0}
+#materias{padding-top:clamp(1.25rem,3vw,2.25rem);padding-bottom:0}
 #videos{padding-top:clamp(1.25rem,3vw,2.25rem);padding-bottom:calc(clamp(1.25rem,3vw,2.25rem) - 3px)}
 section h2{font:800 clamp(1.75rem,4vw,2.5rem)/1.1 var(--sans);margin:0 0 2rem;letter-spacing:-.02em}
 .meta{font:500 .9rem/1.3 var(--sans);color:var(--muted)}
@@ -74,6 +75,7 @@ footer{padding:2rem 0 3rem}
     <strong>Letícia Woolf</strong>
     <nav aria-label="Seções">
       <a href="#reportagens">Reportagens</a>
+      <a href="#materias">Matérias</a>
       <a href="#videos">Vídeos</a>
       <a href="#fotos">Fotos</a>
       <a href="#contato">Contato</a>
@@ -88,6 +90,11 @@ footer{padding:2rem 0 3rem}
     <section id="reportagens">
       <h2>Reportagens</h2>
       <ul class="reports" id="lista-reportagens"></ul>
+    </section>
+
+    <section id="materias">
+      <h2>Matérias publicadas</h2>
+      <ul class="reports" id="lista-materias"></ul>
     </section>
 
     <section id="videos">
@@ -130,6 +137,7 @@ footer{padding:2rem 0 3rem}
    ===================================================== */
 
 const REPORTAGENS = [
+  { titulo: "Estação NET: um dos últimos cinemas de rua da cidade se reinventa com programações especiais", data: "Abr 2026", link: "reportagens/estacao-net.pdf" },
   { titulo: "Conheça os projetos que oferecem apoio a mães e crianças atípicas na Rocinha", data: "Out 2025",
     resumo: "Mães Valentes da Favela, Anjos na Favela e Rocinha Inclusiva dão suporte a famílias que enfrentam a demora e os custos do diagnóstico de autismo.",
     nota: "Com Luiz Guilherme Figueiredo e Samuel Benassi. Extensão em Jornalismo e Cidadania, em parceria com o jornal Fala Roça.",
@@ -144,6 +152,33 @@ const REPORTAGENS = [
   { titulo: "Uma livraria no coração do Leblon", data: "Mai 2025",
     resumo: "Com mais de 45 anos, a Livraria Argumento segue como espaço de resistência cultural e de encontro diante do varejo digital.",
     link: "reportagens/livraria-argumento.pdf" }
+];
+
+/* Matérias publicadas em sites (Entretetizei, Portal das Nove). Mesmo formato das reportagens. */
+const MATERIAS = [
+  { titulo: "Japan House São Paulo tem programação dedicada à carpintaria japonesa", data: "Entretetizei · Abr 2026", resumo: "Instituição promove encontros que dialogam com a exposição em cartaz e com o respeito às tradições nipônicas e à natureza durante o mês de abril", link: "https://entretetizei.com.br/japan-house-sao-paulo-tem-programacao-dedicada-a-carpintaria-japonesa/" },
+  { titulo: "Trailer final de O Diabo Veste Prada 2 chega ao som de Doechii e Lady Gaga", data: "Entretetizei · Abr 2026", resumo: "Pôsteres individuais dos personagens também foram divulgados", link: "https://entretetizei.com.br/trailer-final-de-o-diabo-veste-prada-2-chega-ao-som-de-doechii-e-lady-gaga/" },
+  { titulo: "Exclusivo | Novela vertical Loquinha estreia nas redes sociais com participação de Daphne Bozaski", data: "Entretetizei · Abr 2026", resumo: "Os capítulos estarão disponíveis nos perfis da emissora e no streaming", link: "https://entretetizei.com.br/novela-vertical-loquinha-estreia-nas-redes-sociais/" },
+  { titulo: "Streaming anuncia estreias de abril", data: "Entretetizei · Abr 2026", resumo: "Entre os destaques estão a 5ª temporada da série The Boys e o filme Marty Supreme", link: "https://entretetizei.com.br/streaming-anuncia-estreias-de-abril/" },
+  { titulo: "Tudo que já sabemos sobre o musical de O Diabo Veste Prada", data: "Entretetizei · Mar 2026", resumo: "Espetáculo chega ao Brasil em 2027, no Teatro Santander", link: "https://entretetizei.com.br/tudo-que-ja-sabemos-sobre-o-musical-de-o-diabo-veste-prada/" },
+  { titulo: "Com Hugh Jackman, As Ovelhas Detetives ganha novo trailer e cartaz", data: "Entretetizei · Mar 2026", resumo: "Filme estreia em maio nos cinemas brasileiros", link: "https://entretetizei.com.br/com-hugh-jackman-as-ovelhas-detetives-ganha-novo-trailer-e-cartaz/" },
+  { titulo: "XEN, do grupo OMEGA X, lança novo single", data: "Entretetizei · Mar 2026", resumo: "F KILLER está disponível em formato digital nas plataformas de streaming", link: "https://entretetizei.com.br/xen-do-grupo-omega-x-lanca-novo-single/" },
+  { titulo: "Vencedor do Oscar de Melhor Curta-Documentário tem brasileira na equipe", data: "Entretetizei · Mar 2026", resumo: "Jess Weiss é diretora de produção do curta que levou a estatueta para casa", link: "https://entretetizei.com.br/vencedor-do-oscar-de-melhor-curta-documentario-tem-brasileira-na-equipe/" },
+  { titulo: "Novo trailer e pôster de O Diabo Veste Prada 2 são revelados", data: "Entretetizei · Mar 2026", resumo: "Filme chega em abril nos cinemas brasileiros", link: "https://entretetizei.com.br/novo-trailer-e-poster-de-o-diabo-veste-prada-2-sao-revelados" },
+  { titulo: "Além das telonas: estreias de teatro musical no eixo Rio-SP em 2026", data: "Entretetizei · Mar 2026", resumo: "Novas peças e reestreias chegam em peso no país durante todo o ano", link: "https://entretetizei.com.br/alem-das-telonas-estreias-de-teatro-musical-no-eixo-rio-sp-em-2026/" },
+  { titulo: "Ali Hazelwood se aventura no mundo dos games em novo livro Jogo de Amor para Dois", data: "Entretetizei · Mar 2026", resumo: "Lançado no Brasil nesta segunda-feira (3), o romance rivais-a-amantes promete agradar fãs da autora e do gênero", link: "https://entretetizei.com.br/ali-hazelwood-se-aventura-no-mundo-dos-games-em-novo-livro-jogo-de-amor-para-dois/" },
+  { titulo: "O Serviço de Entregas da Kiki, do Studio Ghibli, volta aos cinemas em formato IMAX", data: "Entretetizei · Mar 2026", resumo: "A animação com distribuição da Sato Company chega nas salas brasileiras dia 12 de março", link: "https://entretetizei.com.br/o-servico-de-entregas-da-kiki-do-studio-ghibli-volta-aos-cinemas-em-formato-imax/" },
+  { titulo: "Sneak peek de O Diabo Veste Prada 2 é lançado durante entrevista", data: "Entretetizei", link: "https://entretetizei.com.br/sneak-peek-de-o-diabo-veste-prada-2-e-lancado-durante-entrevista/" },
+  { titulo: "Kid Abelha anuncia turnê Eu Tive um Sonho em estádios", data: "Entretetizei", link: "https://entretetizei.com.br/kid-abelha-anuncia-turne-eu-tive-um-sonho-em-estadios/" },
+  { titulo: "Rodrigo Santoro e Johnny Massaro estrelam adaptação de O Diário de um Mago", data: "Entretetizei", link: "https://entretetizei.com.br/rodrigo-santoro-e-johnny-massaro-estrelam-adaptacao-de-o-diario-de-um-mago/" },
+  { titulo: "Novo trailer de That Time I Got Reincarnated as a Slime – O Filme: Lágrimas do Mar Azul Celeste é lançado", data: "Entretetizei", link: "https://entretetizei.com.br/novo-trailer-de-that-time-i-got-reincarnated-as-a-slime-o-filme-lagrimas-do-mar-azul-celeste-e-lancado/" },
+  { titulo: "Todo Mundo em Pânico ganha novo trailer com referência a Michael", data: "Entretetizei", link: "https://entretetizei.com.br/todo-mundo-em-panico-ganha-novo-trailer-com-referencia-a-michael/" },
+  { titulo: "Streaming de conteúdo asiático anuncia estreias de maio", data: "Entretetizei", link: "https://entretetizei.com.br/streaming-de-conteudo-asiatico-anuncia-estreias-de-maio/" },
+  { titulo: "Top Gun: veja vídeo inédito de bastidores em comemoração ao filme que completa 40 anos", data: "Entretetizei", link: "https://entretetizei.com.br/top-gun-veja-video-inedito-de-bastidores-em-comemoracao-ao-filme-que-completa-40-anos/" },
+  { titulo: "Louis Tomlinson anuncia show no Brasil", data: "Entretetizei", link: "https://entretetizei.com.br/louis-tomlinson-anuncia-show-no-brasil/" },
+  { titulo: "Woodz retorna ao Brasil para show em julho", data: "Entretetizei", link: "https://entretetizei.com.br/woodz-retorna-ao-brasil-para-show-em-julho/" },
+  { titulo: "Mercado de falsificações movimenta a cidade no mês da Copa do Mundo", data: "Portal das Nove", link: "https://portaldasnove.wixsite.com/home/post/mercado-de-falsificações-movimenta-a-cidade-no-mês-da-copa-do-mundo" },
+  { titulo: "Coletivo luta pela permanência das mães na universidade", data: "Portal das Nove", link: "https://portaldasnove.wixsite.com/home/post/coletivo-luta-pela-permanência-das-mães-na-universidade" }
 ];
 
 /* Vídeo: use "drive" (código do arquivo no Google Drive), "youtube" (código do vídeo)
@@ -169,11 +204,13 @@ const botaoDrive = document.getElementById("botao-drive");
 if (LINK_DRIVE) { botaoDrive.href = LINK_DRIVE; botaoDrive.hidden = false; }
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-document.getElementById("lista-reportagens").innerHTML = REPORTAGENS.map(r => `
-  <li><a href="${esc(r.link)}">
+const itemLista = r => `
+  <li><a href="${esc(r.link)}"${/^https?:/.test(r.link) ? ' target="_blank" rel="noopener"' : ""}>
     <div class="meta">${esc(r.data)}</div>
-    <div><h3>${esc(r.titulo)}</h3><p>${esc(r.resumo)}</p>${r.nota ? `<p class="meta">${esc(r.nota)}</p>` : ""}</div>
-  </a></li>`).join("");
+    <div><h3>${esc(r.titulo)}</h3>${r.resumo ? `<p>${esc(r.resumo)}</p>` : ""}${r.nota ? `<p class="meta">${esc(r.nota)}</p>` : ""}</div>
+  </a></li>`;
+for (const [id, lista] of [["lista-reportagens", REPORTAGENS], ["lista-materias", MATERIAS]])
+  document.getElementById(id).innerHTML = lista.map(itemLista).join("");
 
 document.getElementById("lista-videos").innerHTML = VIDEOS.map(v => {
   let media = '<span class="meta" style="color:inherit">Adicione o vídeo</span>';
